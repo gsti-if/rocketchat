@@ -1,6 +1,7 @@
-## RocketChat funcional por trás do Treafik 2.4 com ICP Edu Ativo
-Este projeto pode implementa o RocketChat 4.0.0 +Mongo 4.2 em com Docker-Compose atrás do proxy reverso Traefik, já com as configurações 
-do ICP Edu  do campus.
+## RocketChat funcional baseado ENV_FILE
+Este projeto pode implementa o RocketChat 4.X +Mongo 4.2 em com Docker-Compose de modo que as configurações básicas, de LDAP, de SMTP e Omnichannel são carregadas automaticamente a partir do arquivo (env_file) .env-rocket.
+
+> Para tratar questões de domínio e certificado SSL, convém usar um serviço de proxy reverso. [Aqui um docker-compose para implementar o Traefik com Lets Encrypt](https://github.com/ifrs-sertao/traefik-letsencrypt).
 
 ## Requisitos
 - Docker e Docker-Compose
@@ -61,4 +62,15 @@ A saída dos logs do compose deve chegar em:
 ```bash
 
 
+```
+### Backup do banco Mongo em Docker
+É no banco que ficam todas as configurações e canais criados do Rocket Chat.
+
+#### Gerando o backup do mongo
+```shell
+docker exec mongo sh -c 'mongodump --archive' > db.dump
+```
+#### Restaurando o backup do mongo
+```shell
+docker exec -i mongo sh -c 'mongorestore --archive' < db.dump
 ```

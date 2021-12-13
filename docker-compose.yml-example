@@ -3,7 +3,7 @@ version: '3.4'
 services:    
   rocketchat:
     container_name: rocketchat
-    image: rocketchat/rocket.chat:4.0.0
+    image: rocketchat/rocket.chat:4.2.1
     command: "node main.js"
     env_file: 
       - .env-rocket
